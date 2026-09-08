@@ -1,7 +1,7 @@
 # B站 Feed API 实测数据 (2026-08-09)
 
 ## 测试环境
-- Cookie: SESSDATA=52819ffd... (UID=228407179, 用户名=互联网实习生)
+- Cookie: SESSDATA=52819ffd... (UID=100000001, 用户名=示例用户)
 - bilibili-api-python v17.4.2
 - Python 3.13.5, requests
 

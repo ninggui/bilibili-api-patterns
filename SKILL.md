@@ -79,4 +79,4 @@ info = await user.get_self_info(cred)
 - **浏览器 Console 兜底**: `references/browser-console-fallback.md`（terminal 被 consent 拦 / space API 需 WBI 签名时，用 browser+console fetch 研究 B站 KOL，2026-08 验证）
 - 相关 skill: `bilibili-watch-later`（需 `hermes curator adopt bilibili-watch-later` 后可合并）
 - 脚本位置: `/path/to/data/skills/productivity/bilibili-watch-later/scripts/bilibili_watch_later.py`
-- 当前有效凭证: SESSDATA=`52819ffd...`, UID=228407179, 用户名=互联网实习生
+- 当前有效凭证: SESSDATA=`52819ffd...`, UID=100000001, 用户名=示例用户
