@@ -1,5 +1,8 @@
 <div align="center">
 
+
+![cover](assets/cover.png)
+
 # bilibili-api-patterns
 
 **B站 API 避坑手册：聚合优于遍历，否则 412 风控教你做人。**
