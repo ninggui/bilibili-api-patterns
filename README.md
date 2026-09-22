@@ -2,64 +2,40 @@
 
 # bilibili-api-patterns
 
-**B站 API: feed aggregation, cookie pitfalls, anti-412.**
+**B站 API 避坑手册：聚合优于遍历，否则 412 风控教你做人。**
 
-[SkillHub 在线安装](https://skillhub.cn/skills/bilibili-api-patterns) · [快速使用](#快速使用) · [核心能力](#核心能力) · [使用边界](#使用边界)
+<p>
+  <a href="#"><img src="https://img.shields.io/badge/wbi-signed-blue?logo=bilibili&logoColor=white" alt="WBI" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/avoid-412-red" alt="No 412" /></a>
+</p>
+
+[核心原则](#核心原则) · [主力接口](#主力接口) · [避坑](#避坑)
 
 </div>
 
 ---
 
-这是作者在真实业务场景中沉淀的可复用 AI Agent 技能（Skill），来自 Hermes Agent 实战运维，含完整执行流程、避坑清单与验证步骤。
+## 核心原则
 
-## 快速使用
+**聚合优于遍历**。逐个 UP 主/逐个视频爬 = 必死。优先用聚合接口一次拉全。
 
-将本仓库放入 Agent 技能目录后，用对应触发词调用，Agent 会自动加载并执行完整流程。
+## 主力接口
 
-```text
-使用 bilibili-api-patterns 技能。
-这是待处理内容，直接执行。
+```
+GET https://api.bilibili.com/x/polymer/web-dynamic/v1/feed/all
 ```
 
-## 核心能力
-
-| 能力 | 说明 |
+| 参数 | 说明 |
 |------|------|
-| 完整流程 | 步骤清晰，含验证与避坑 |
-| 即装即用 | 目录完整，无需额外依赖 |
-| 持续迭代 | 实战沉淀，随场景更新 |
+| type=video | 仅视频动态（推荐） |
+| type=all | 全部动态 |
+| page / offset | 翻页游标 |
 
-## 触发场景
+## 避坑
 
-- 涉及「bilibili-api-patterns」的场景任务
-- 需要复用已验证方法论的工作
-- 批量/复杂任务中的专项环节
-
-## 使用方式（安装）
-
-- **Hermes**: 放入 `skills/` 目录
-- **Claude Code**: 放入 `~/.claude/skills/`
-- **Cursor**: 放入 `.cursor/skills/`
-- **SkillHub**: 一键安装（见上方徽章链接）
-
-## 目录结构
-
-<details>
-<summary><strong>查看完整目录</strong></summary>
-
-```text
-SKILL.md              # 主技能文件：流程、边界与执行规则
-references/           # 参考文档（方法、模板、数据）
-scripts/              # 可执行脚本（如有）
-```
-
-</details>
-
-## 使用边界
-
-- 本技能来自个人实践沉淀，按需取用，不承诺适用于所有场景
-- 敏感信息（密钥、内网地址、个人数据）不写入技能内容
-- 命令与脚本如与实际环境不符，以当前环境为准
+- 未签名的 `x/player/v2` 字幕接口会串台，必须用 `x/player/wbi/v2` + wbi 签名
+- 请求间隔 ≥ 2s，412 退避 10/20/30s
+- cookie 里的 SESSDATA 是核心，bili_jct 用于写操作
 
 ## License
 
